@@ -5,7 +5,9 @@ Works with linux and OSX
 
 Uses config file ~/.config/.shellpostrc or whatever is defined in SHELLPOSTRC environment variable. 
 
-I haven't done c for a very, very long time. That's my excuse and I'm sticking to it. 
+If there is no config file you'll be taken through the process of getting authentication details and saving them to it.
+
+>>I haven't done c for a very, very long time. That's my excuse and I'm sticking to it. 
 
 ## How to use
 
