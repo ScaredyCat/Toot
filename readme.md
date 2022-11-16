@@ -20,7 +20,8 @@ shellpost highly uses the UNIX philosophy
 # the same as the filename.
 
 
-./shellpost -v private -t "Some title text" -D "File 1 alt test/description" -F file1.png -D "File 2 alt text/description" -F file2.png -s "Here is the body of the text #shellpost" 
+./shellpost -v private -t "Some title text" -D "File 1 alt test/description" -F file1.png -D "File 2 alt text/description" 
+-F file2.png -s "Here is the body of the text #shellpost" 
 #Post 2 files with different descriptions with a topic (not marked sensitive) with the private scope.
 
 
