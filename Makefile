@@ -1,4 +1,4 @@
-# demiurge makefile
+#  makefile
 
 TARGET = shellpost
 OBJS   = login.o util.o post.o main.o upload_file.o asprintf.o follow.o

@@ -36,7 +36,7 @@
 void
 usage(const char *progname)
 {
-	printf("Usage: %s -s=status [-v=visibility] [-F=filename]\n", progname);
+	printf("Usage: %s -s=status [-v=visibility] [-D=description] [-F=filename] [-t=topic | -c=content-warning]\n", progname);
 	return;
 }
 
@@ -56,15 +56,18 @@ help()
 	puts("-D, --description: description of any file uploaded. ** Put before "
 		"-F or --filename **");
 	puts("-F, --filename: filename to be attatched with the post.\n");
-	puts("Topic -t will not mark this content as sensitive but -c will mark it as sensitive.\n");
+	puts("Topic -t will not mark this content as sensitive but -c will.");
+	puts("This only affects attachements. If, for example, an image is attached and the post is marked as sensitive, it should be blurred/obscured by the instance. If the post is not marked as sensitive the image would not be obscurred.\n");
+
 	puts("-t, --topic: Topic or content warning text");
 	puts("-c, --content-warning: Topic or content warning text");
 
 	puts("-v, --visibility: The visibility which the post will have, can "
-		"be: public unlisted, private and direct");
+		"be: local, public unlisted, private and direct");
 	puts("-f, --follow: Follow an account");
 	puts("-u, --unfollow: Unfollow an account");
 	puts("-U, --usage: prints usage message");
+	puts("-V, --version: prints current version");
 	puts("-h, --help: prints this help message\n\n");
 
 	puts("Example:\n");
@@ -87,13 +90,15 @@ main(int argc, char **argv)
 	char *topic = NULL;
 	char *visibility = NULL;
 	char *media_ptr[__MAX_UPLOADS__];
+	//char *mediadesc_ptr[__MAX_UPLOADS__];
 
 	bool sensitive = false;
 
 	for(int a=0;a<__MAX_UPLOADS__; a++)
 		media_ptr[a] = NULL;
 
-	struct mediafiles *mediaFiles;
+	//for(int a=0;a<__MAX_UPLOADS__; a++)
+	//	mediadesc_ptr[a] = NULL;
 
 	unsigned int idc = 0;
 
@@ -124,12 +129,13 @@ main(int argc, char **argv)
 		{ "follow", required_argument, 0, 'f' },
 		{ "unfollow", required_argument, 0, 'u' },
 		{ "usage", no_argument, 0, 'U' },
+		{ "version", no_argument, 0, NULL},
 		{ "help", no_argument, 0, 'h' },
 		{ 0, 0, 0, 0 }
 	};
 
 	while((c = getopt_long(
-			  argc, argv, "s:v:D:F:f:t:c:u:hU", long_options, &option_index)) !=
+			  argc, argv, "s:v:D:F:f:t:c:u:VhU", long_options, &option_index)) !=
 		 -1) {
 		switch(c) {
 			case 's':
@@ -140,6 +146,7 @@ main(int argc, char **argv)
 				break;
 			case 'D':
 				filedesc = optarg;
+				//mediadesc_ptr[idc] = optarg;
 				break;
 			case 'F':
 				if (idc < __MAX_UPLOADS__) {
@@ -177,6 +184,10 @@ main(int argc, char **argv)
 				usage(argv[0]);
 				return 0;
 				break;
+			case 'V':
+				puts(__VERSION__);
+				return 0;
+				break;
 			case '?':
 				break;
 			default:
@@ -187,7 +198,7 @@ main(int argc, char **argv)
 	}
 
 	if(status == NULL) {
-		eputs("Enter a status (-s)");
+		eputs("\nMust have status text (use -s \"Your status\")\n");
 		return -1;
 	}
 

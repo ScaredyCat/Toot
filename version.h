@@ -18,4 +18,4 @@
   You should have received a copy of the GNU General Public License
   along with shellpost.  If not, see <https://www.gnu.org/licenses/>.
 */
-#define __VERSION__ "shellpost version 1.0.12"
+#define __VERSION__ "shellpost version 1.0.13"

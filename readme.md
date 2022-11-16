@@ -1,13 +1,11 @@
 
-shellpost is a fork of demiurge. For a start I struggled with the name and then I just wanted to add a few more features like multiple uploads per message. I resisted the urge to call it something with toot in the name. Tested with Pleroma 2.4.4 might work with Mastodon.
+shellpost is a fork of demiurge. For a start I struggled with the name and then I just wanted to add a few more features like multiple uploads per message.
 
 Works with linux and OSX 
 
 Uses config file ~/.config/.shellpostrc or whatever is defined in SHELLPOSTRC environment variable. 
 
-If there is no config file you'll be taken through the process of getting authentication details and saving them to it.
-
->I haven't done c for a very, very long time. That's my excuse and I'm sticking to it. 
+I haven't done c for a very, very long time. That's my excuse and I'm sticking to it. 
 
 ## How to use
 
@@ -22,8 +20,7 @@ shellpost highly uses the UNIX philosophy
 # the same as the filename.
 
 
-./shellpost -v private -t "Some title text" -D "File 1 alt test/description" -F file1.png -D "File 2 alt text/description" 
--F file2.png -s "Here is the body of the text #shellpost" 
+./shellpost -v private -t "Some title text" -D "File 1 alt test/description" -F file1.png -D "File 2 alt text/description" -F file2.png -s "Here is the body of the text #shellpost" 
 #Post 2 files with different descriptions with a topic (not marked sensitive) with the private scope.
 
 

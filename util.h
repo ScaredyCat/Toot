@@ -1,5 +1,6 @@
 #ifndef UTIL_H
 #define UTIL_H
+
 /*
   This file is part of shellpost.
 
@@ -20,7 +21,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define __MAX_UPLOADS__ 6
+#define __MAX_UPLOADS__ 12
 
 
 struct config
