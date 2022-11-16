@@ -1,5 +1,5 @@
 
-shellpost is a fork of demiurge. For a start I struggled with the name and then I just wanted to add a few more features like multiple uploads per message. I resisted the urge to call it something with toot in the name. 
+shellpost is a fork of demiurge. For a start I struggled with the name and then I just wanted to add a few more features like multiple uploads per message. I resisted the urge to call it something with toot in the name. Tested with Pleroma 2.4.4 
 
 Works with linux and OSX 
 
