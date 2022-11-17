@@ -1,7 +1,7 @@
 
-toot is a fork of demiurge. For a start I struggled with the name and then I just wanted to add a few more features like multiple uploads per message.
+Toot is a fork of demiurge. For a start I struggled with the name and then I just wanted to add a few more features like multiple uploads per message.
 
-Works with linux and OSX 
+Works with linux and OSX - Tested with Pleroma 2.4.4 and Mastodon 4.0.2
 
 Uses config file ~/.config/.tootrc or whatever is defined in TOOTRC environment variable. 
 
