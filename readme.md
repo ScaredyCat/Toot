@@ -11,7 +11,7 @@ I haven't done c for a very, very long time. That's my excuse and I'm sticking t
 
 ## How to use
 
-toot highly uses the UNIX philosophy
+toot uses the UNIX philosophy
 
 ``` shell
 ./toot -s "Hello this is a status" -v "unlisted" 
