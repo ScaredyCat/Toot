@@ -1,18 +1,18 @@
 /*
-  This file is part of shellpost.
+  This file is part of toot.
 
-  shellpost is free software: you can redistribute it and/or modify
+  toot is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
 
-  shellpost is distributed in the hope that it will be useful,
+  toot is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
 
   You should have received a copy of the GNU General Public License
-  along with shellpost.  If not, see <https://www.gnu.org/licenses/>.
+  along with toot.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 #include <stdio.h>
@@ -71,7 +71,7 @@ help()
 	puts("-h, --help: prints this help message\n\n");
 
 	puts("Example:\n");
-	puts("shellpost -v private -t \"Some title text\" -D \"File 1 alt test/description\" -F file1.png -D \"File 2 alt text/description\" -F file2.png -s \"Here is the body of the text #shellpost\"\n");
+	puts("toot -v private -t \"Some title text\" -D \"File 1 alt test/description\" -F file1.png -D \"File 2 alt text/description\" -F file2.png -s \"Here is the body of the text #toot\"\n");
 	
 
 }
@@ -90,20 +90,17 @@ main(int argc, char **argv)
 	char *topic = NULL;
 	char *visibility = NULL;
 	char *media_ptr[__MAX_UPLOADS__];
-	//char *mediadesc_ptr[__MAX_UPLOADS__];
 
 	bool sensitive = false;
 
 	for(int a=0;a<__MAX_UPLOADS__; a++)
 		media_ptr[a] = NULL;
 
-	//for(int a=0;a<__MAX_UPLOADS__; a++)
-	//	mediadesc_ptr[a] = NULL;
+
 
 	unsigned int idc = 0;
 
 	char *account_id = NULL;
-	/* TODO: Support filename and visibility */
 
 	if(!isatty(0)) {
 		eputs("Not a terminal, reading from stdin");
@@ -146,7 +143,6 @@ main(int argc, char **argv)
 				break;
 			case 'D':
 				filedesc = optarg;
-				//mediadesc_ptr[idc] = optarg;
 				break;
 			case 'F':
 				if (idc < __MAX_UPLOADS__) {

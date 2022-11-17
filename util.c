@@ -1,18 +1,18 @@
 /*
-  This file is part of shellpost.
+  This file is part of toot.
 
-  shellpost is free software: you can redistribute it and/or modify
+  toot is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
 
-  shellpost is distributed in the hope that it will be useful,
+  toot is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
 
   You should have received a copy of the GNU General Public License
-  along with shellpost.  If not, see <https://www.gnu.org/licenses/>.
+  along with toot.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 #include <stdio.h>
@@ -31,10 +31,10 @@ static const char *get_config_filename(void)
 	if(ret)
 		return ret;
 
-	ret = getenv("SHELLPOSTRC");
+	ret = getenv("TOOTRC");
 
 	if(!ret) {
-		ret = "~/.config/.shellpostrc";
+		ret = "~/.config/.tootrc";
 	}
 
 	return ret;

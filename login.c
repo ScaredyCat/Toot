@@ -1,18 +1,18 @@
 /*
-  This file is part of shellpost.
+  This file is part of toot.
 
-  shellpost is free software: you can redistribute it and/or modify
+  toot is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
 
-  shellpost is distributed in the hope that it will be useful,
+  toot is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
 
   You should have received a copy of the GNU General Public License
-  along with shellpost.  If not, see <https://www.gnu.org/licenses/>.
+  along with toot.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 #include "config.h"
@@ -55,10 +55,10 @@ get_client_id(struct config *config)
 	
 	curl_easy_setopt(curl,
 				  CURLOPT_POSTFIELDS,
-				  "client_name=shellpost"
+				  "client_name=Toot"
 				  "&redirect_uris=urn:ietf:wg:oauth:2.0:oob"
-				  "&scope=read+write+follow"
-				  "&website=https://toot.net-pbx.com");
+				  "&scopes=read+write+follow"
+				  "&website=https://github.com/ScaredyCat/Toot");
 
 	curl_easy_perform(curl);
 	curl_easy_cleanup(curl);
