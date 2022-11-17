@@ -5,6 +5,8 @@ Works with linux and OSX - Tested with Pleroma 2.4.4 and Mastodon 4.0.2
 
 Uses config file ~/.config/.tootrc or whatever is defined in TOOTRC environment variable. 
 
+```TOOTRC=~/.config/.myotherserver.rc toot -s "This is using a different config file"```
+
 I haven't done c for a very, very long time. That's my excuse and I'm sticking to it. 
 
 ## How to use
