@@ -27,7 +27,8 @@
 #include "util.h"
 #include "post.h"
 #include "upload_file.h"
-#include "follow.h"
+#include "fetch.h"
+#include "accounts.h"
 
 #include "version.h"
 
@@ -96,10 +97,7 @@ main(int argc, char **argv)
 	for(int a=0;a<__MAX_UPLOADS__; a++)
 		media_ptr[a] = NULL;
 
-
-
 	unsigned int idc = 0;
-
 	char *account_id = NULL;
 
 	if(!isatty(0)) {
@@ -115,12 +113,22 @@ main(int argc, char **argv)
 		return -1;
 	}
 
+	struct config config;
+
+	if(load_config(&config) < 0) {
+		fprintf(stderr, "Error loading config");
+		return -1;
+	}
+
+
 	int option_index = 0;
 	static struct option long_options[] = {
 		{ "status", required_argument, 0, 's' },
+		{ "search", required_argument, 0, 'S' },		
 		{ "topic", required_argument, 0, 't' },
 		{ "content-warning", required_argument, 0, 'c' },
 		{ "description", required_argument, 0, 'D' },
+		{ "zee", required_argument, 0, 'Z' },
 		{ "filename", required_argument, 0, 'F' },
 		{ "visibility", required_argument, 0, 'v' },
 		{ "follow", required_argument, 0, 'f' },
@@ -132,9 +140,13 @@ main(int argc, char **argv)
 	};
 
 	while((c = getopt_long(
-			  argc, argv, "s:v:D:F:f:t:c:u:VhU", long_options, &option_index)) !=
+			  argc, argv, "s:v:Z:D:F:f:t:c:u:S:VhU", long_options, &option_index)) !=
 		 -1) {
 		switch(c) {
+			case 'S':
+				request_account_id(optarg, &config);
+				return 0;
+				break;
 			case 's':
 				status = optarg;
 				break;
@@ -159,18 +171,15 @@ main(int argc, char **argv)
 				sensitive=true;
                 break;				
 			case 'f':
-				account_id = get_account_id(optarg);
-				if(account_id) {
-					follow_account(account_id, 'f');
-					free(account_id);
-				}
+				// Mastodon api is annoying, requires a search to get account_id
+				// doesn't accept @user@domain.tld
+				puts(follow_account(optarg, 'f',&config));			
 				return 0;
+				break;
 			case 'u':
-				account_id = get_account_id(optarg);
-				if(account_id) {
-					follow_account(account_id, 'u');
-					free(account_id);
-				}
+				// Mastodon api is annoying, requires a search to get account_id
+				// doesn't accept @user@domain.tld			
+				puts(follow_account(optarg, 'u',&config));
 				return 0;
 			case 'h':
 				help();
@@ -182,6 +191,10 @@ main(int argc, char **argv)
 				break;
 			case 'V':
 				puts(__VERSION__);
+				return 0;
+				break;
+			case 'Z':
+				request_account_id(optarg, &config);
 				return 0;
 				break;
 			case '?':

@@ -40,4 +40,3 @@ client you\'d use. For example:
 export x=$(curl https://some-website.tld)
 ./toot -s "current weather: $x"
 ```
-
