@@ -92,6 +92,7 @@ main(int argc, char **argv)
 	char *media_ptr[__MAX_UPLOADS__];
 
 	bool sensitive = false;
+	bool abort = false;
 
 	for(int a=0;a<__MAX_UPLOADS__; a++)
 		media_ptr[a] = NULL;
@@ -139,7 +140,7 @@ main(int argc, char **argv)
 
 	while((c = getopt_long(
 			  argc, argv, "s:v:Z:D:F:f:t:c:u:S:VhU", long_options, &option_index)) !=
-		 -1) {
+		 -1 && abort == false) {
 		switch(c) {
 			case 'S':
 				request_account_id(optarg, &config);
@@ -156,8 +157,11 @@ main(int argc, char **argv)
 				break;
 			case 'F':
 				if (idc < __MAX_UPLOADS__) {
-					upload_file(optarg, filedesc, &media_ptr[idc]);
-					idc++;
+					if (upload_file(optarg, filedesc, &media_ptr[idc]) == 0)
+						idc++;
+					else {
+						abort = true;
+					}
 				}
 				break;
 			case 't':
@@ -202,7 +206,7 @@ main(int argc, char **argv)
 		}
 	}
 
-	if(status == NULL) {
+	if(status == NULL && false == abort) {
 		eputs("\nMust have status text (use -s \"Your status\")\n");
 		return -1;
 	}
@@ -212,7 +216,9 @@ main(int argc, char **argv)
 		visibility = "public";
 	}
 
-	post_status(status, visibility, topic, sensitive, media_ptr);
-
+	if (false == abort)
+		post_status(status, visibility, topic, sensitive, media_ptr);
+	else
+		puts("Message post aborted.");
 	return 0;
 }

@@ -67,6 +67,8 @@ upload_file(const char *path, const char *description, char **id_ptr)
 	curl_mimepart *description_part;
 	description_part = curl_mime_addpart(mime);
 	/* Upload file */
+	curl_easy_setopt(curl, CURLOPT_POST, 1L);
+	curl_easy_setopt(curl, CURLOPT_POSTFIELDS, "");
 
 	curl_mime_filedata(image_part, path);
 	curl_mime_name(image_part, "file");
@@ -82,12 +84,22 @@ upload_file(const char *path, const char *description, char **id_ptr)
 	curl_easy_setopt(curl, CURLOPT_URL, url_to_post);
 
 	/* Free the things */
-	curl_easy_perform(curl);
+	CURLcode cret = curl_easy_perform(curl);
 	free(url_to_post);
 	curl_easy_cleanup(curl);
 	curl_mime_free(mime);
 	curl_slist_free_all(header_list);
 	/* Get the media id */
+
+
+	if(cret != CURLE_OK) {
+		/* response error problem */
+		printf("Error code %d occured when interactin with server.\n", cret);
+		printf("It's unlikely that the file '%s' was uploaded\n", path);
+		*id_ptr =  NULL;
+		return -1;
+	}
+
 	parsed_json = json_tokener_parse(chunk.response);
 	json_object_object_get_ex(parsed_json, "id", &json_media_id);
 	const char *media_id = json_object_get_string(json_media_id);
