@@ -18,4 +18,4 @@
   You should have received a copy of the GNU General Public License
   along with toot.  If not, see <https://www.gnu.org/licenses/>.
 */
-#define __VERSION__ "Toot version 1.0.16"
+#define __TOOT_VERSION__ "Toot version 1.0.18"

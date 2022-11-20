@@ -1,18 +1,18 @@
 /*
-  This file is part of toot.
+  This file is part of Toot.
 
-  toot is free software: you can redistribute it and/or modify
+  Toot is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
 
-  toot is distributed in the hope that it will be useful,
+  Toot is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
 
   You should have received a copy of the GNU General Public License
-  along with toot.  If not, see <https://www.gnu.org/licenses/>.
+  along with Toot.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 #include <stdio.h>
@@ -22,14 +22,14 @@
 #include <libgen.h>
 #include <stdbool.h>
 #include <unistd.h>
+#include "util.h"
 
 #include "login.h"
-#include "util.h"
 #include "post.h"
 #include "upload_file.h"
 #include "fetch.h"
-#include "accounts.h"
 
+#include "accounts.h"
 #include "version.h"
 
 /* prints usage */
@@ -74,7 +74,6 @@ help()
 	puts("Example:\n");
 	puts("toot -v private -t \"Some title text\" -D \"File 1 alt test/description\" -F file1.png -D \"File 2 alt text/description\" -F file2.png -s \"Here is the body of the text #toot\"\n");
 	
-
 }
 
 /* prints a string to stderr */
@@ -98,7 +97,6 @@ main(int argc, char **argv)
 		media_ptr[a] = NULL;
 
 	unsigned int idc = 0;
-	char *account_id = NULL;
 
 	if(!isatty(0)) {
 		eputs("Not a terminal, reading from stdin");
@@ -134,7 +132,7 @@ main(int argc, char **argv)
 		{ "follow", required_argument, 0, 'f' },
 		{ "unfollow", required_argument, 0, 'u' },
 		{ "usage", no_argument, 0, 'U' },
-		{ "version", no_argument, 0, NULL},
+		{ "version", no_argument, 0, 'V'},
 		{ "help", no_argument, 0, 'h' },
 		{ 0, 0, 0, 0 }
 	};
@@ -171,14 +169,12 @@ main(int argc, char **argv)
 				sensitive=true;
                 break;				
 			case 'f':
-				// Mastodon api is annoying, requires a search to get account_id
-				// doesn't accept @user@domain.tld
+				// Follow
 				puts(follow_account(optarg, 'f',&config));			
 				return 0;
 				break;
 			case 'u':
-				// Mastodon api is annoying, requires a search to get account_id
-				// doesn't accept @user@domain.tld			
+				// Unfollow		
 				puts(follow_account(optarg, 'u',&config));
 				return 0;
 			case 'h':
@@ -190,7 +186,7 @@ main(int argc, char **argv)
 				return 0;
 				break;
 			case 'V':
-				puts(__VERSION__);
+				puts(__TOOT_VERSION__);
 				return 0;
 				break;
 			case 'Z':

@@ -17,6 +17,10 @@
   along with toot.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-int
-upload_file(const char *path, const char *description, char **id_ptr);
+/// @brief Upload a file, optionally, with description and get a meda id
+/// @param path of file being uploaded
+/// @param description description of the file, used as alt text
+/// @param id_ptr array pointer used to attach 0 or more files to a status post.
+/// @return 0
+int upload_file(const char *path, const char *description, char **id_ptr);
 #endif /* UPLOAD_FILE_H */

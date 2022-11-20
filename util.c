@@ -26,7 +26,7 @@
 
 static const char *get_config_filename(void)
 {
-	static const char *ret = NULL;
+	static char *ret = NULL;
 
 	if(ret)
 		return ret;
@@ -43,7 +43,7 @@ static const char *get_config_filename(void)
 int
 config_exists(void)
 {
-	char *ret = get_config_filename();
+	const char *ret = get_config_filename();
 	int fileRes = -1;
 
  	wordexp_t result;
@@ -59,7 +59,7 @@ config_exists(void)
 int
 store_config(const struct config *config)
 {
-	char *ret = get_config_filename();
+	const char *ret = get_config_filename();
 
  	wordexp_t result;
 	wordexp( ret, &result, 0 );
@@ -114,7 +114,7 @@ load_config(struct config *config)
 
 	int i;
 	char line[256];
-	char *ret = get_config_filename();
+	const char *ret = get_config_filename();
 
  	wordexp_t result;
 	wordexp( ret, &result, 0 );

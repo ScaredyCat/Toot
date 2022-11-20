@@ -1,4 +1,4 @@
-#  makefile
+#  Toot makefile
 
 UNAME_S := $(shell uname -s)
 
