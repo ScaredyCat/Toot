@@ -45,7 +45,7 @@ void
 help()
 {
 	puts("\n");
-	puts(__VERSION__);
+	puts(__TOOT_VERSION__);
 
 	puts("\nPost messages and images to an ActivityPub service, e.g. Pleroma, Mastodon.");
 	puts("Parameters");
@@ -219,6 +219,6 @@ main(int argc, char **argv)
 	if (false == abort)
 		post_status(status, visibility, topic, sensitive, media_ptr);
 	else
-		puts("Message post aborted.");
+		puts("Something went wrong, message post aborted.");
 	return 0;
 }

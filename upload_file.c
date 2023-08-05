@@ -94,7 +94,7 @@ upload_file(const char *path, const char *description, char **id_ptr)
 
 	if(cret != CURLE_OK) {
 		/* response error problem */
-		printf("Error code %d occured when interactin with server.\n", cret);
+		printf("Error code %d  (Stream error in the HTTP/2 framing layer.) occured when interactin with server.\n", cret);
 		printf("It's unlikely that the file '%s' was uploaded\n", path);
 		*id_ptr =  NULL;
 		return -1;
